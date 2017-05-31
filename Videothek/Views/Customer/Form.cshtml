@@ -1,0 +1,48 @@
+﻿@model Videothek.ViewModels.CustomerFormViewModel
+@{
+    ViewBag.Title = "New";
+}
+
+<h2>New Customer</h2>
+
+@using (Html.BeginForm("Save", "Customer"))
+{
+    <div class="form-horizontal">
+
+        <div class="form-group">
+            @Html.LabelFor(c => c.Customer.Name)
+            @Html.TextBoxFor(c => c.Customer.Name, new { @class = "form-control" })
+            @Html.ValidationMessageFor(c => c.Customer.Name)
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(c => c.Customer.Birthday)
+            @Html.TextBoxFor(c => c.Customer.Birthday, new { @class = "form-control" })
+            @Html.ValidationMessageFor(c => c.Customer.Birthday)
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(c => c.Customer.MembershipId)
+            @Html.DropDownListFor(c => c.Customer.MembershipId, new SelectList(Model.Memberships, "Id", "Name"), "", new { @class = "form-control" })
+            @Html.ValidationMessageFor(c => c.Customer.MembershipId)
+
+
+            <div class="checkbox">
+                @Html.CheckBoxFor(c => c.Customer.IsSubscribedToNewsletter)
+                @Html.LabelFor(c => c.Customer.IsSubscribedToNewsletter)
+            </div>
+        </div>
+
+        @Html.HiddenFor(c => c.Customer.Id)
+        @Html.AntiForgeryToken()
+        <button class="btn btn-default" type="submit">Save</button>
+    </div>
+}
+
+@section scripts{
+    @Scripts.Render("~/bundles/jqueryval");
+
+    <script>
+        $("#Customer_Birthday").removeAttr("data-val-date");
+    </script>
+}

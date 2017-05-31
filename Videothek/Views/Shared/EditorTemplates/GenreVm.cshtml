@@ -1,0 +1,8 @@
+﻿@model Videothek.ViewModels.GenreVm
+
+<label class="checkbox-inline">
+    @Html.HiddenFor(g => g.Id)
+    @Html.CheckBoxFor(g => g.IsChecked)
+
+    @Html.DisplayFor(g => g.Name)
+</label>

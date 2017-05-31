@@ -1,0 +1,38 @@
+﻿@using Microsoft.AspNet.Identity;
+
+@model List<VideothekData.Models.Movie>
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>All Movies</h2>
+@if (User.IsInRole("CanManageMovie"))
+{
+    @Html.ActionLink("Add new Movie", "New")
+}
+
+
+<table class="table table-hover">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Genres</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var movie in Model)
+        {
+            <tr>
+                <td>
+                    @Html.ActionLink(movie.Name, "Details", new { id = movie.Id})
+                </td>
+                <td>
+                    @foreach (var genre in movie.Genres)
+                    {
+                        <span>@genre.Name</span>
+                    }
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

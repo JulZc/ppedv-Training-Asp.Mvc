@@ -1,0 +1,29 @@
+﻿@model List<VideothekData.Models.Customer>
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>All Customers</h2>
+@Html.ActionLink("Add new Customer", "New")
+
+<table class="table table-hover">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Membership</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var customer in Model)
+        {
+            <tr>
+                <td>
+                    @Html.ActionLink(customer.Name, "Details", new { id = customer.Id })
+                </td>
+                <td>
+                    @customer.Membership.Name
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

@@ -1,0 +1,46 @@
+﻿@model Videothek.ViewModels.MovieFormViewModel
+
+@{
+    ViewBag.Title = "New";
+}
+
+<h2>New Movie</h2>
+@using (Html.BeginForm("Save", "Movie"))
+{
+    <div class="form-horizontal">
+        <div class="form-group">
+            @Html.LabelFor(model => model.Movie.Name)
+            @Html.TextBoxFor(model => model.Movie.Name, new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.Movie.Name)
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Movie.NumberInStock)
+            @Html.TextBoxFor(model => model.Movie.NumberInStock, new { @class = "form-control", type = "number" })
+            @Html.ValidationMessageFor(model => model.Movie.NumberInStock)
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Movie.Released)
+            @Html.TextBoxFor(model => model.Movie.Released, "{0:d}", new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.Movie.Released)
+        </div>
+
+        <div class="form-group">
+            @Html.EditorFor(model => model.Genres) <br />
+            @Html.ValidationMessage("MinOneGenre")
+        </div>
+
+        @Html.HiddenFor(c => c.Movie.Id)
+        @Html.AntiForgeryToken()
+        <button class="btn btn-default" type="submit">Save</button>
+    </div>
+}
+
+@section scripts{
+    @Scripts.Render("~/bundles/jqueryval")
+
+    <script>
+        $("#Movie_Released").removeAttr("data-val-date");
+    </script>
+}

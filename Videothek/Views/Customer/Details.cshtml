@@ -1,0 +1,29 @@
+﻿@model VideothekData.Models.Customer
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>@Model.Name</h2>
+
+<dl class="dl-horizontal">
+    <dt>Newsletter</dt>
+    <dd>@Model.IsSubscribedToNewsletter</dd>
+
+    @if (Model.Birthday.HasValue)
+    {
+        <dt>Birthday</dt>
+        <dd>@Model.Birthday.Value.ToShortDateString()</dd>
+    }
+
+
+    <br />
+    <dt>Membership</dt>
+    <dd>@Model.Membership.Name</dd>
+
+    <dt>Discount</dt>
+    <dd>@Model.Membership.DiscountRate%</dd>
+</dl>
+
+
+@Html.ActionLink("Back", "Index") | 
+@Html.ActionLink("Edit", "Edit", new { id = Model.Id })
